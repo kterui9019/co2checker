@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 requests = "*"
 python-dotenv = "*"
+gspread = "*"
+oauth2client = "*"
 
 [dev-packages]
 
@@ -14,4 +16,5 @@ python_version = "3.9"
 
 [scripts]
 check = "python src/main.py check"
+logging = "python src/main.py logging"
 test = "python -m unittest discover tests"

@@ -10,15 +10,15 @@ sys.path.append(str(Path(__file__).parent.parent.parent / "src"))
 # targets
 from src.driver.notifier.LineNotifier import LineNotifier
 from src.domain.Co2 import Co2
-from src.handler.CheckHandler import CheckHandler
+from src.handler.Co2Handler import Co2Handler
 
-class CheckHandlerTest(unittest.TestCase):
+class Co2HandlerTest(unittest.TestCase):
     def test_check_dangerous(self):
         co2 = Co2(2001)
         usecase = MagicMock()
         usecase.measurement.return_value = co2
 
-        target = CheckHandler(usecase)
+        target = Co2Handler(usecase)
         target.check()
 
         assert usecase.measurement.called is True
@@ -28,11 +28,18 @@ class CheckHandlerTest(unittest.TestCase):
         usecase = MagicMock()
         usecase.measurement.return_value = Co2(2000)
 
-        target = CheckHandler(usecase)
+        target = Co2Handler(usecase)
         target.check()
 
         assert usecase.measurement.called is True
         assert usecase.alert.called is False
+
+    def test_logging(self):
+        usecase = MagicMock()
+        target = Co2Handler(usecase)
+        target.logging()
+
+        assert usecase.logging.called is True
 
 if __name__ == "__main__":
     unittest.main()
