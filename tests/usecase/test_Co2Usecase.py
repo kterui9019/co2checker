@@ -17,9 +17,10 @@ class Co2UsecaseTest(unittest.TestCase):
     self.sensor_mock = MagicMock()
 
   def test_alart(self):
+    co2 = Co2(3000)
     target = Co2Usecase(self.notifier_mock, self.sensor_mock)
-    target.alert()
-    assert target.notifier.notify.called is True
+    target.alert(co2)
+    target.notifier.notify.assert_called_with(co2)
 
   def test_measurement(self):
     expect = Co2(500)

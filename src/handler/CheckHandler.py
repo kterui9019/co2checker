@@ -5,4 +5,4 @@ class CheckHandler:
   def check(self):
     co2 = self.usecase.measurement()
     if (co2.is_dangerous()):
-      self.usecase.alert()
+      self.usecase.alert(co2)

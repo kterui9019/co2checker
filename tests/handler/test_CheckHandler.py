@@ -14,14 +14,15 @@ from src.handler.CheckHandler import CheckHandler
 
 class CheckHandlerTest(unittest.TestCase):
     def test_check_dangerous(self):
+        co2 = Co2(2001)
         usecase = MagicMock()
-        usecase.measurement.return_value = Co2(2001)
+        usecase.measurement.return_value = co2
 
         target = CheckHandler(usecase)
         target.check()
 
         assert usecase.measurement.called is True
-        assert usecase.alert.called is True
+        usecase.alert.assert_called_with(co2)
 
     def test_check_safe(self):
         usecase = MagicMock()
