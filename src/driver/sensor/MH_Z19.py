@@ -3,13 +3,15 @@ from src.domain.Co2 import Co2
 
 import subprocess
 import json
+import config
 
 class MH_Z19(AbstractSensor):
   def __init__(self):
     self.subprocess = subprocess
 
   def _execute_subprocess(self):
-    out = self.subprocess.check_output(['sudo', 'python3', '-m', 'mh_z19'])
+    passwd = config.SUDO.encode()
+    out = self.subprocess.check_output(['sudo', '-S', 'python3', '-m', 'mh_z19'], input=passwd)
     return json.loads(out)
 
   def measurement(self):

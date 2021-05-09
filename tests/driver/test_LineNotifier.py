@@ -27,7 +27,6 @@ class LineNotifierTest(unittest.TestCase):
 
     target.notify()
 
-    print(target.requests.post)
     target.requests.post.assert_called_with(line_endpoint_url, data=json.dumps(payload), headers=headers)
 
 if __name__ == "__main__":

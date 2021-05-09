@@ -9,3 +9,4 @@ dotenv_path = join(Path(__file__).parent, '.env')
 load_dotenv(dotenv_path)
 
 APIKEY = os.environ.get("LINE_API_KEY")
+SUDO = os.environ.get("SUDO_PASSWD")

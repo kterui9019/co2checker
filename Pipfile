@@ -11,3 +11,7 @@ python-dotenv = "*"
 
 [requires]
 python_version = "3.9"
+
+[scripts]
+check = "python src/main.py check"
+test = "python -m unittest discover tests"
