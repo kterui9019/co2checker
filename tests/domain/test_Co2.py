@@ -16,8 +16,8 @@ class Co2Test(unittest.TestCase):
       Co2(-1)
       
   def test_is_dangerous(self):
-    safe_target = Co2(2000)
-    dangerous_target = Co2(2001)
+    safe_target = Co2(1000)
+    dangerous_target = Co2(1001)
 
     assert safe_target.is_dangerous() is False
     assert dangerous_target.is_dangerous() is True

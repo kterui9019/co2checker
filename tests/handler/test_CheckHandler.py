@@ -14,7 +14,7 @@ from src.handler.Co2Handler import Co2Handler
 
 class Co2HandlerTest(unittest.TestCase):
     def test_check_dangerous(self):
-        co2 = Co2(2001)
+        co2 = Co2(1001)
         usecase = MagicMock()
         usecase.measurement.return_value = co2
 
@@ -26,7 +26,7 @@ class Co2HandlerTest(unittest.TestCase):
 
     def test_check_safe(self):
         usecase = MagicMock()
-        usecase.measurement.return_value = Co2(2000)
+        usecase.measurement.return_value = Co2(1000)
 
         target = Co2Handler(usecase)
         target.check()

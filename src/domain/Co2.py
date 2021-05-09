@@ -5,4 +5,4 @@ class Co2:
     self.value = value
 
   def is_dangerous(self):
-    return self.value > 2000
+    return self.value > 1000
