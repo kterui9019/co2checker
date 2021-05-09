@@ -12,7 +12,7 @@ class LineNotifier(AbstractNotifier):
     payload = {"message": "二酸化炭素濃度が上昇しています。"}
     headers = {"Authorization": f"Bearer {config.APIKEY}"}
 
-    res = self.requests.post(line_endpoint_url, data=json.dumps(payload), headers=headers)
+    res = self.requests.post(line_endpoint_url, data=payload, headers=headers)
 
     if res.status_code >= 400:
       raise requests.exceptions.HTTPError("LINE API HTTPステータスコードエラー")

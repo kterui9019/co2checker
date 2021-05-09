@@ -30,7 +30,7 @@ class LineNotifierTest(unittest.TestCase):
 
     target.notify()
 
-    target.requests.post.assert_called_with(line_endpoint_url, data=json.dumps(payload), headers=headers)
+    target.requests.post.assert_called_with(line_endpoint_url, data=payload, headers=headers)
 
   def test_http_error(self):
     target = LineNotifier()
