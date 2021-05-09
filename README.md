@@ -22,11 +22,16 @@ $ pipenv install
 ```
 
 ### 実行
-main.pyの第一引数にオペレーション名を入力して実行します。
+オペレーション名を指定して`pipenv run`を実行します。
 ```
-$ python src/main.py check
+$ pipenv run check
 ```
 
 |  operation  |  description  |
 | ---- | ---- |
 |  check  |  二酸化炭素濃度を測定して、しきい値を超えていればLINE Notifyに通知します。  |
+
+### UnitTest
+```
+$ pipenv run test
+```
