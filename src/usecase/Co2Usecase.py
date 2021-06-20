@@ -6,12 +6,11 @@ class Co2Usecase:
     self.sensor = sensorDriver
     self.logger = loggingDriver
 
-  def alert(self, co2: Co2):
-    self.notifier.notify(co2)
-
   def measurement(self):
-    return self.sensor.measurement()
+    co2 = self.sensor.measurement()
+    if (co2.is_dangerous()):
+      self.notifier.notify(co2)
     
   def logging(self):
-    co2 = self.measurement()
+    co2 = self.sensor.measurement()
     self.logger.logging(co2)

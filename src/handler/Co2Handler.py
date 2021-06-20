@@ -3,9 +3,7 @@ class Co2Handler:
     self.usecase = usecase
 
   def check(self):
-    co2 = self.usecase.measurement()
-    if (co2.is_dangerous()):
-      self.usecase.alert(co2)
+    self.usecase.measurement()
 
   def logging(self):
     self.usecase.logging()

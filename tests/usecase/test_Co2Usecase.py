@@ -16,21 +16,31 @@ class Co2UsecaseTest(unittest.TestCase):
     self.notifier_mock = MagicMock()
     self.sensor_mock = MagicMock()
     self.logger_mock = MagicMock()
+  
+  def tearDown(self) -> None:
+    self.notifier_mock.reset_mock()
+    self.sensor_mock.reset_mock()
+    self.logger_mock.reset_mock()
+    return super().tearDown()
 
-  def test_alart(self):
-    co2 = Co2(3000)
+  def test_safe_measurement(self):
     target = Co2Usecase(self.notifier_mock, self.sensor_mock, self.logger_mock)
-    target.alert(co2)
+    self.sensor_mock.measurement.return_value = Co2(1000)
+
+    target.measurement()
+    
+    target.sensor.measurement.assert_called_once()
+    target.notifier.notify.assert_not_called()
+
+  def test_dangerous_measurement(self):
+    target = Co2Usecase(self.notifier_mock, self.sensor_mock, self.logger_mock)
+    co2 = Co2(1001)
+    self.sensor_mock.measurement.return_value = co2
+
+    target.measurement()
+
+    target.sensor.measurement.assert_called_once()
     target.notifier.notify.assert_called_with(co2)
-
-  def test_measurement(self):
-    expect = Co2(500)
-    self.sensor_mock.measurement.return_value = expect
-
-    target = Co2Usecase(self.notifier_mock, self.sensor_mock, self.logger_mock)
-
-    actual = target.measurement()
-    self.assertEqual(actual, expect) 
 
   def test_logging(self):
     co2 = Co2(2000)
